@@ -1,0 +1,113 @@
+\chapter{二项式系数}
+\section*{预备知识}
+基本组合数公式：
+\[\binom{n}{k} = \binom{n}{n-k}.\]
+
+帕斯卡公式:
+\[\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.\]
+
+\section{二项式定理}
+\begin{theorem}[二项式定理]
+    设\(n\)是正整数.对所有的\(x\)和\(y\)， 有\[(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k.\]
+\end{theorem}
+\begin{proof}
+    法1：乘积展开，对项\(x^{n-k}y^k\)，选择\(k\)个因子为\(y\)而剩下\(n-k\)个因子为\(x\)的组合数.
+
+    法2：归纳法.\(n=1\)时等式成立.
+
+    假设等式对\(n\)成立，对于\(n+1\)：
+
+    \begin{align*}
+(x + y)^{n+1} &= (x + y) \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) \\
+&= x \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) + y \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) \\
+&= \sum_{k=0}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^{k+1} \\
+&= \binom{n}{0} x^{n+1} + \sum_{k=1}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n-1} \binom{n}{k} x^{n-k} y^{k+1} + \binom{n}{n} y^{n+1}\\
+&= x^{n+1} + \sum_{k=1}^{n} \left[ \binom{n}{k} + \binom{n}{k-1} \right] x^{n+1-k} y^k + y^{n+1}\\
+&=x^{n+1} + \sum_{k=1}^{n} \binom{n+1}{k} x^{n+1-k} y^k + y^{n+1}\\
+&=\sum_{k=0}^{n+1} \binom{n+1}{k} x^{n+1-k} y^k.
+    \end{align*}
+    即证.
+\end{proof} 
+\section{组合恒等式}
+通过二项式定理和组合数的性质，可以得到诸多有益的推论和组合恒等式.
+
+\begin{corollary}
+    集合\(S\)含有奇数个元素的子集的数目恒等于含有偶数个元素的子集的数目.
+\end{corollary}
+\begin{proof}
+    设\(|S|=n\). 在二项式定理中，令\(x=1,y=-1\)，得
+    \[\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \cdots + (-1)^n \binom{n}{n} = 0 .\]
+
+    令\(x=1,y=1\)，得
+    \[\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n} = 2^n.\]
+
+    因此有
+    \begin{align*}
+\binom{n}{0} + \binom{n}{2} + \cdots &= 2^{n-1}, \\
+\binom{n}{1} + \binom{n}{3} + \cdots &= 2^{n-1}.
+    \end{align*}
+
+    即证.
+\end{proof}
+
+对等式进行求导和积分是构造组合恒等式的常见思路.如对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)，两边对\(x\)求导得\(n(1 + x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\)，带入\(x=1\)得\(n 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\).更进一步地，该组合恒等式还可以在两边乘以\(x\)后继续迭代求导，以得到\(\sum_{k=1}^{n} k^p \binom{n}{k}\)对任意常数\(p\)的组合恒等式.一个积分构造组合恒等式的例子：
+
+\begin{corollary}
+    $$\frac{2^{n+1}-1}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{1}{k+1}.$$
+\end{corollary}
+\begin{proof}
+    对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)两边对\(x\)求不定积分：
+
+    \[\frac{(1+x)^{n+1}}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{x^{k+1}}{k+1} + C.\]
+
+    令\(x=0\)，解得\(C=\frac{1}{n+1}\). 令\(x=1\)，即得所求式子.注意两边求不定积分容易遗漏常数\(C\).
+\end{proof}
+
+\begin{corollary}[范德蒙卷积公式]
+    对正整数\(m_1, m_2, n\)，有
+    \[\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} = \binom{m_1+m_2}{n}.\]
+\end{corollary}
+\begin{proof}
+    设\(S\)是一个有\(m_1+m_2\)个元素的集合，我们需要计数\(S\)的\(n\)子集的数目（即等式右边）.把\(S\)划分成\(A,B\)两个子集，其中\(|A|=m_1,|B|=m_2\).利用这个划分去划分\(S\)的\(n\)子集.\(S\)的每一个\(n\)子集包含\(k\)和\(A\)的元素和\(n-k\)和\(B\)的元素，这里\(0\leq k \leq n\).根据加法原理计数所有\(k\)的取值情况，可得
+    \[\binom{m_1+m_2}{n}=\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} .\]
+    即证.
+\end{proof}
+
+特别地，我们有：
+\[\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n} \quad (n \geqslant 0).\]
+
+\section{二项式系数的单峰性}
+\begin{theorem}
+    设 $n$ 为正整数.二项式系数序列
+\[
+\binom{n}{0}, \binom{n}{1}, \binom{n}{2}, \ldots, \binom{n}{n}
+\]
+是单峰序列.更精确地说，如果 $n$ 是偶数，则
+\[
+\binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{n/2} \]\[
+\binom{n}{n/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
+\]
+如果 $n$ 是奇数，则
+\[
+\binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{(n-1)/2} = \binom{n}{(n+1)/2} \]\[
+\binom{n}{(n+1)/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
+\]
+\end{theorem}
+\begin{proof}
+    考虑\(1\leq k\leq n\).
+    \[\frac{\binom{n}{k}}{\binom{n}{k-1}} = \frac{\frac{n!}{k!(n-k)!}}{\frac{n!}{(k-1)!(n-k+1)!}} = \frac{n-k+1}{k}.\]
+
+    比较\(k\)和\(n-k+1\)的大小关系即可得出结论.
+\end{proof}
+\begin{corollary}
+    对于正整数 $n$，二项式系数
+\[
+\binom{n}{0}, \binom{n}{1}, \binom{n}{2}, \ldots, \binom{n}{n}
+\]
+中的最大者为
+\[
+\binom{n}{\lfloor n/2 \rfloor} = \binom{n}{\lceil n/2 \rceil}.
+\]
+\end{corollary}
+
+待补充
