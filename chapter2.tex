@@ -1,1 +1,44 @@
 \chapter{容斥原理}
+\section*{引言}
+本章内容主要来自Brualdi <<组合数学>> 第6章(容斥原理及应用)的内容及对其的拓展与思考.
+
+\section{容斥原理及其对偶形式}
+设$S$是对象的有限集合, $P_1, P_2, \cdots, P_m$ 是 $S$ 的对象所涉及的 $m$ 个性质，并设
+\[ A_i = \{ x : x \text{ 属于 } S \text{ 且 } x \text{ 具有性质 } P_i \} \quad (i = 1, 2, \cdots, m). \]
+
+\begin{theorem}[容斥原理的对偶形式]
+    集合 $S$ 中不具有性质 $P_1, P_2, \cdots, P_m$ 的对象个数由下面的交错表达式给出：
+\begin{align*}
+    &|\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m| \\
+    =& |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + \cdots + (-1)^m |A_1 \cap A_2 \cap \cdots \cap A_m|.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+    显然, 不具备$P_1, P_2, \cdots, P_m$中任何一条性质的对象对等式右边的贡献为$1$, 该贡献源于$|S|$.
+
+    对具备$n\geq 1$条性质的对象, 我们证明它对等式右边的贡献为$0$. 它对集合$|S|$, $\sum |A_i|$, $\sum |A_i \cap A_j|$, $\cdots$的贡献依次为: $1$, $\binom{n}{1}$, $\binom{n}{2}$, $\cdots$. 由推论\ref{exstl1}得其在等式右边贡献和为
+    $$\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \binom{n}{3} + \cdots + (-1)^n \binom{n}{n}=0.$$
+    即证.
+\end{proof}
+
+\begin{theorem}[容斥原理]
+    集合 $S$ 中至少具有性质 $P_1, P_2, \cdots, P_m$ 之一的对象个数由下式给出：
+\begin{align*}
+    &|A_1 \cup A_2 \cup \cdots \cup A_m| \\=&\sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
+\end{align*}
+\end{theorem}
+\begin{proof}
+    由德摩根律
+    $$\overline{A_1 \cup A_2 \cup \cdots \cup A_m} = \overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m.$$
+
+    因此,
+    \begin{align*}
+        &|A_1 \cup A_2 \cup \cdots \cup A_m|\\=&|S|-\overline{A_1 \cup A_2 \cup \cdots \cup A_m}\\
+        =&|S|-\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m\\
+        =&\sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
+    \end{align*}
+\end{proof}
+
+\section{Möbius反演}
+
