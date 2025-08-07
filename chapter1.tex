@@ -1,113 +1,177 @@
 \chapter{二项式系数}
 \section*{预备知识}
 基本组合数公式：
-\[\binom{n}{k} = \binom{n}{n-k}.\]
+\[\binom{n}{k} = \binom{n}{n-k}.  \]
 
 帕斯卡公式:
-\[\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.\]
+\[\binom{n}{k} = \binom{n-1}{k}+\binom{n-1}{k-1}.  \]
 
 \section{二项式定理}
 \begin{theorem}[二项式定理]
-    设\(n\)是正整数.对所有的\(x\)和\(y\)， 有\[(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k.\]
+    设\(n\)是正整数.  对所有的\(x\)和\(y\),  有\[(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k.  \]
 \end{theorem}
 \begin{proof}
-    法1：乘积展开，对项\(x^{n-k}y^k\)，选择\(k\)个因子为\(y\)而剩下\(n-k\)个因子为\(x\)的组合数.
+    法1：乘积展开, 对项\(x^{n-k}y^k\), 选择\(k\)个因子为\(y\)而剩下\(n-k\)个因子为\(x\)的组合数.
 
-    法2：归纳法.\(n=1\)时等式成立.
+    法2：归纳法.  \(n=1\)时等式成立.
 
-    假设等式对\(n\)成立，对于\(n+1\)：
+    假设等式对\(n\)成立, 对于\(n+1\)：
 
     \begin{align*}
-(x + y)^{n+1} &= (x + y) \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) \\
-&= x \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) + y \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) \\
-&= \sum_{k=0}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^{k+1} \\
-&= \binom{n}{0} x^{n+1} + \sum_{k=1}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n-1} \binom{n}{k} x^{n-k} y^{k+1} + \binom{n}{n} y^{n+1}\\
-&= x^{n+1} + \sum_{k=1}^{n} \left[ \binom{n}{k} + \binom{n}{k-1} \right] x^{n+1-k} y^k + y^{n+1}\\
-&=x^{n+1} + \sum_{k=1}^{n} \binom{n+1}{k} x^{n+1-k} y^k + y^{n+1}\\
-&=\sum_{k=0}^{n+1} \binom{n+1}{k} x^{n+1-k} y^k.
+        (x + y)^{n+1} & = (x + y) \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right)                                                                          \\
+                      & = x \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right) + y \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right)                     \\
+                      & = \sum_{k=0}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^{k+1}                                                 \\
+                      & = \binom{n}{0} x^{n+1} + \sum_{k=1}^{n} \binom{n}{k} x^{n+1-k} y^k + \sum_{k=0}^{n-1} \binom{n}{k} x^{n-k} y^{k+1} + \binom{n}{n} y^{n+1} \\
+                      & = x^{n+1} + \sum_{k=1}^{n} \left[ \binom{n}{k} + \binom{n}{k-1} \right] x^{n+1-k} y^k + y^{n+1}                                           \\
+                      & =x^{n+1} + \sum_{k=1}^{n} \binom{n+1}{k} x^{n+1-k} y^k + y^{n+1}                                                                          \\
+                      & =\sum_{k=0}^{n+1} \binom{n+1}{k} x^{n+1-k} y^k.
     \end{align*}
     即证.
-\end{proof} 
+\end{proof}
 \section{组合恒等式}
-通过二项式定理和组合数的性质，可以得到诸多有益的推论和组合恒等式.
+通过二项式定理和组合数的性质, 可以得到诸多有益的推论和组合恒等式.
 
 \begin{corollary}
     集合\(S\)含有奇数个元素的子集的数目恒等于含有偶数个元素的子集的数目.
 \end{corollary}
 \begin{proof}
-    设\(|S|=n\). 在二项式定理中，令\(x=1,y=-1\)，得
-    \[\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \cdots + (-1)^n \binom{n}{n} = 0 .\]
+    设\(|S|=n\).   在二项式定理中, 令\(x=1, y=-1\), 得
+    \[\binom{n}{0} - \binom{n}{1} + \binom{n}{2} - \cdots + (-1)^n \binom{n}{n} = 0 .  \]
 
-    令\(x=1,y=1\)，得
-    \[\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n} = 2^n.\]
+    令\(x=1, y=1\), 得
+    \[\binom{n}{0} + \binom{n}{1} + \binom{n}{2} + \cdots + \binom{n}{n} = 2^n.  \]
 
     因此有
     \begin{align*}
-\binom{n}{0} + \binom{n}{2} + \cdots &= 2^{n-1}, \\
-\binom{n}{1} + \binom{n}{3} + \cdots &= 2^{n-1}.
+        \binom{n}{0} + \binom{n}{2} + \cdots & = 2^{n-1}, \\
+        \binom{n}{1} + \binom{n}{3} + \cdots & = 2^{n-1}.
     \end{align*}
 
     即证.
 \end{proof}
 
-对等式进行求导和积分是构造组合恒等式的常见思路.如对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)，两边对\(x\)求导得\(n(1 + x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\)，带入\(x=1\)得\(n 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\).更进一步地，该组合恒等式还可以在两边乘以\(x\)后继续迭代求导，以得到\(\sum_{k=1}^{n} k^p \binom{n}{k}\)对任意常数\(p\)的组合恒等式.一个积分构造组合恒等式的例子：
+对等式进行求导和积分是构造组合恒等式的常见思路.  如对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\), 两边对\(x\)求导得\(n(1 + x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\), 带入\(x=1\)得\(n 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\).  更进一步地, 该组合恒等式还可以在两边乘以\(x\)后继续迭代求导, 以得到\(\sum_{k=1}^{n} k^p \binom{n}{k}\)对任意常数\(p\)的组合恒等式.  一个积分构造组合恒等式的例子：
 
 \begin{corollary}
-    $$\frac{2^{n+1}-1}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{1}{k+1}.$$
+    $$\frac{2^{n+1}-1}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{1}{k+1}.  $$
 \end{corollary}
 \begin{proof}
     对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)两边对\(x\)求不定积分：
 
-    \[\frac{(1+x)^{n+1}}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{x^{k+1}}{k+1} + C.\]
+    \[\frac{(1+x)^{n+1}}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{x^{k+1}}{k+1} + C.  \]
 
-    令\(x=0\)，解得\(C=\frac{1}{n+1}\). 令\(x=1\)，即得所求式子.注意两边求不定积分容易遗漏常数\(C\).
+    令\(x=0\), 解得\(C=\frac{1}{n+1}\).   令\(x=1\), 即得所求式子.  注意两边求不定积分容易遗漏常数\(C\).
 \end{proof}
 
 \begin{corollary}[范德蒙卷积公式]
-    对正整数\(m_1, m_2, n\)，有
-    \[\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} = \binom{m_1+m_2}{n}.\]
+    对正整数\(m_1,  m_2,  n\), 有
+    \[\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} = \binom{m_1+m_2}{n}.  \]
 \end{corollary}
 \begin{proof}
-    设\(S\)是一个有\(m_1+m_2\)个元素的集合，我们需要计数\(S\)的\(n\)子集的数目（即等式右边）.把\(S\)划分成\(A,B\)两个子集，其中\(|A|=m_1,|B|=m_2\).利用这个划分去划分\(S\)的\(n\)子集.\(S\)的每一个\(n\)子集包含\(k\)和\(A\)的元素和\(n-k\)和\(B\)的元素，这里\(0\leq k \leq n\).根据加法原理计数所有\(k\)的取值情况，可得
-    \[\binom{m_1+m_2}{n}=\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} .\]
+    设\(S\)是一个有\(m_1+m_2\)个元素的集合, 我们需要计数\(S\)的\(n\)子集的数目（即等式右边）.  把\(S\)划分成\(A, B\)两个子集, 其中\(|A|=m_1, |B|=m_2\).  利用这个划分去划分\(S\)的\(n\)子集.  \(S\)的每一个\(n\)子集包含\(k\)和\(A\)的元素和\(n-k\)和\(B\)的元素, 这里\(0\leq k \leq n\).  根据加法原理计数所有\(k\)的取值情况, 可得
+    \[\binom{m_1+m_2}{n}=\sum_{k=0}^{n} \binom{m_1}{k} \binom{m_2}{n-k} .  \]
     即证.
 \end{proof}
 
-特别地，我们有：
-\[\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n} \quad (n \geqslant 0).\]
+特别地, 我们有：
+\[\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n} \quad (n \geqslant 0).  \]
 
 \section{二项式系数的单峰性}
 \begin{theorem}
-    设 $n$ 为正整数.二项式系数序列
-\[
-\binom{n}{0}, \binom{n}{1}, \binom{n}{2}, \ldots, \binom{n}{n}
-\]
-是单峰序列.更精确地说，如果 $n$ 是偶数，则
-\[
-\binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{n/2} \]\[
-\binom{n}{n/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
-\]
-如果 $n$ 是奇数，则
-\[
-\binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{(n-1)/2} = \binom{n}{(n+1)/2} \]\[
-\binom{n}{(n+1)/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
-\]
+    设 $n$ 为正整数.   二项式系数序列
+    \[
+        \binom{n}{0},  \binom{n}{1},  \binom{n}{2},  \ldots,  \binom{n}{n}
+    \]
+    是单峰序列.  更精确地说, 如果 $n$ 是偶数, 则
+    \[
+        \binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{n/2} \]\[
+        \binom{n}{n/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
+    \]
+    如果 $n$ 是奇数, 则
+    \[
+        \binom{n}{0} < \binom{n}{1} < \cdots < \binom{n}{(n-1)/2} = \binom{n}{(n+1)/2} \]\[
+        \binom{n}{(n+1)/2} > \cdots > \binom{n}{n-1} > \binom{n}{n}.
+    \]
 \end{theorem}
 \begin{proof}
     考虑\(1\leq k\leq n\).
-    \[\frac{\binom{n}{k}}{\binom{n}{k-1}} = \frac{\frac{n!}{k!(n-k)!}}{\frac{n!}{(k-1)!(n-k+1)!}} = \frac{n-k+1}{k}.\]
+    \[\frac{\binom{n}{k}}{\binom{n}{k-1}} = \frac{\frac{n!}{k!(n-k)!}}{\frac{n!}{(k-1)!(n-k+1)!}} = \frac{n-k+1}{k}.  \]
 
     比较\(k\)和\(n-k+1\)的大小关系即可得出结论.
 \end{proof}
-\begin{corollary}
-    对于正整数 $n$，二项式系数
-\[
-\binom{n}{0}, \binom{n}{1}, \binom{n}{2}, \ldots, \binom{n}{n}
-\]
-中的最大者为
-\[
-\binom{n}{\lfloor n/2 \rfloor} = \binom{n}{\lceil n/2 \rceil}.
-\]
+\begin{corollary}\label{exsxs1}
+    对于正整数 $n$, 二项式系数
+    \[
+        \binom{n}{0},  \binom{n}{1},  \binom{n}{2},  \ldots,  \binom{n}{n}
+    \]
+    中的最大者为
+    \[
+        \binom{n}{\lfloor n/2 \rfloor} = \binom{n}{\lceil n/2 \rceil}.
+    \]
 \end{corollary}
 
-待补充
+设$S$是$n$元素集合, 定义$S$的一个反链为一个$S$的子集的集合$\mathcal{A}$, 其中$\mathcal{A}$中的任意元素不存在包含关系.   定义$S$的一个链为一个$S$的子集的集合$\mathcal{C}$, 其中$\mathcal{C}$中的任意两元素之间存在包含关系.   显然, $S$的每一个最大链的长度为$n$, 最大链的数目与$n$元素的排列存在一一对应关系, 为$n!$.
+
+\begin{theorem}[Sperner定理]
+    设$S$是$n$元素集合.   那么$S$上的一个反链至多包含$\binom{n}{\lfloor n/2 \rfloor}$个元素.
+\end{theorem}
+\begin{proof}
+    设$\mathcal{A}$是一个反链, $A$是$\mathcal{A}$中的一个元素, $C$是包含$A$的一个最大链. 我们考虑有序对$(A,C)$的数目$\beta $. 每一个$C$包含且只包含$\mathcal{A}$中的一个元素, 因此$\beta \leq n!$. (考虑每个$C$对应的$A$)
+
+    对于$\mathcal{A}$中的一个元素$A$, 设$|A|=k$. 则包含$A$的所有最大链数目为$k!(n-k)!$. (考虑每一个$A$对应的$C$)
+
+    设$\alpha_k$是反链$\mathcal{A}$中大小为$k$的元素个数, 则$|\mathcal{A}|=\sum_{k=0}^{n}\alpha_k$. 于是
+    $$\beta=\sum_{k=0}^{n}\alpha_k k!(n-k)!\leq n.$$
+
+    变形得
+    $$\sum_{k=0}^{n} \frac{a_k}{\binom{n}{k}} \leq 1.$$
+
+    根据推论\ref{exsxs1}可得
+    $$|\mathcal{A}|=\sum_{k=0}^{n}\alpha_k \leq\binom{n}{\lfloor n/2 \rfloor}.$$
+    即证.
+\end{proof}
+
+\section{多项式定理} 
+定义多项式系数
+\[
+\binom{n}{n_1\; n_2 \cdots n_t} = \frac{n!}{n_1! \, n_2! \cdots n_t!.}
+\]
+其中，\( n_1\;, n_2, \cdots, n_t \) 是非负整数且$n_1 + n_2 + \cdots + n_t = n$.
+
+\begin{theorem}[多项式系数的帕斯卡公式]\label{dxspsk}
+    $$\binom{n}{n_1 \; n_2 \; \cdots \; n_t} = \binom{n-1}{n_1-1 \; n_2 \; \cdots \; n_t} + \binom{n-1}{n_1 \; n_2-1 \; \cdots \; n_t} + \cdots + \binom{n-1}{n_1 \; n_2 \; \cdots \; n_t-1}.$$
+\end{theorem}\
+对右边式子通分即可得到证明.
+
+\begin{theorem}[多项式定理]
+    设 \( n \) 是正整数.  对于所有的 \( x_1, x_2, \cdots, x_t \)，有
+\[
+(x_1 + x_2 + \cdots + x_t)^n = \sum \binom{n}{n_1 \, n_2 \cdots n_t} x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}.
+\]
+\end{theorem}
+\begin{proof}
+    法1: 根据乘法原理, 式子$x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}$出现的次数为
+    $$\binom{n}{n_1} \binom{n-n_1}{n_2} \cdots \binom{n-n_1-\cdots-n_{r-1}}{n_r}=\frac{n!}{n_1! \, n_2! \cdots n_t!}=\binom{n}{n_1\; n_2 \cdots n_t}.$$即证.
+
+    法2: 归纳法. 注意是对$n$归纳, 而不是对$k$归纳. $n=1$时等式成立.
+
+    若取值为$n$时等式成立, 即$(x_1 + x_2 + \cdots + x_t)^n = \sum \binom{n}{n_1 \, n_2 \cdots n_t} x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}.$ 当取值为$n+1$时:
+
+    $$(x_1 + x_2 + \cdots + x_t)^{n+1} = \sum_{i=1}^{k}x_i  \sum \binom{n}{n_1 \, n_2 \cdots n_t} x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}.$$
+
+    考虑$(x_1 + x_2 + \cdots + x_t)^{n+1}$中, 项$x_1^{m_1} x_2^{m_2} \cdots x_t^{m_t}$的系数, 其中$m_1+m_2+\cdots m_t=n+1$. 该项可能由$k$种方式产生:
+
+    \begin{itemize}
+        \item 从 \( x_1^{m_1 - 1} x_2^{m_2} \cdots x_k^{m_k} \) 乘以 \( x_1 \)(若 \( m_1 \geq 1 \)), 系数为 \( \frac{n!}{(m_1 - 1)! m_2! \cdots m_k!} \);
+        \item 从 \( x_1^{m_1} x_2^{m_2 - 1} \cdots x_k^{m_k} \) 乘以 \( x_2 \)(若 \( m_2 \geq 1 \)), 系数为 \( \frac{n!}{m_1! (m_2 - 1)! \cdots m_k!} \);
+        \item \(\cdots\)
+        \item 从 \( x_1^{m_1} \cdots x_k^{m_k - 1} \) 乘以 \( x_k \)(若 \( m_k \geq 1 \)), 系数为 \( \frac{n!}{m_1! \cdots (m_k - 1)!} \).
+
+    \end{itemize}
+
+    由定理\ref{dxspsk}, $x_1^{m_1} x_2^{m_2} \cdots x_t^{m_t}$的系数为$\binom{n+1}{m_1 \; m_2 \; \cdots \; m_t}$, 即证.
+
+\end{proof} 
+
+特别的, 当$x_1=x_2=\cdots=x_t=1$时, 有
+$$t^n=\binom{n}{n_1 \, n_2 \cdots n_t}.$$
