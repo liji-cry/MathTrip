@@ -1,4 +1,4 @@
-# MathJourney
+# MathTrip
 
 My research direction is cryptography, and I hope to focus on some topics that interest me in mathematics, which may be helpful for my research, or it may just be of interest. I am interested in fields such as combinatorics, abstract algebra, computational theory, etc. Specific areas include generating functions, finite fields, linear spaces, sieve theory, etc.
 
