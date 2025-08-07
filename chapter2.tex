@@ -8,10 +8,10 @@
 
 \begin{theorem}[容斥原理的对偶形式]
     集合 $S$ 中不具有性质 $P_1, P_2, \cdots, P_m$ 的对象个数由下面的交错表达式给出：
-\begin{align*}
-    &|\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m| \\
-    =& |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + \cdots + (-1)^m |A_1 \cap A_2 \cap \cdots \cap A_m|.
-\end{align*}
+    \begin{align*}
+          & |\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m|                                                         \\
+        = & |S| - \sum |A_i| + \sum |A_i \cap A_j| - \sum |A_i \cap A_j \cap A_k| + \cdots + (-1)^m |A_1 \cap A_2 \cap \cdots \cap A_m|.
+    \end{align*}
 \end{theorem}
 
 \begin{proof}
@@ -24,9 +24,9 @@
 
 \begin{theorem}[容斥原理]
     集合 $S$ 中至少具有性质 $P_1, P_2, \cdots, P_m$ 之一的对象个数由下式给出：
-\begin{align*}
-    &|A_1 \cup A_2 \cup \cdots \cup A_m| \\=&\sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
-\end{align*}
+    \begin{align*}
+         & |A_1 \cup A_2 \cup \cdots \cup A_m| \\=&\sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
+    \end{align*}
 \end{theorem}
 \begin{proof}
     由德摩根律
@@ -34,11 +34,97 @@
 
     因此,
     \begin{align*}
-        &|A_1 \cup A_2 \cup \cdots \cup A_m|\\=&|S|-\overline{A_1 \cup A_2 \cup \cdots \cup A_m}\\
-        =&|S|-\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m\\
-        =&\sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
+          & |A_1 \cup A_2 \cup \cdots \cup A_m|                                                                                        \\=&|S|-\overline{A_1 \cup A_2 \cup \cdots \cup A_m}\\
+        = & |S|-\overline{A}_1 \cap \overline{A}_2 \cap \cdots \cap \overline{A}_m                                                     \\
+        = & \sum |A_i| - \sum |A_i \cap A_j| + \sum |A_i \cap A_j \cap A_k| - \cdots + (-1)^{m+1} |A_1 \cap A_2 \cap \cdots \cap A_m|.
     \end{align*}
 \end{proof}
 
 \section{Möbius反演}
+考虑一个有限偏序集$(X,\leq)$. 设 $\mathcal{F}(X)$ 是满足只要 $x \leq y$ 就有 $f(x, y) = 0$ 的所有实值函数
+\[ f : X \times X \rightarrow \mathbb{R} \]
+的集合，于是 $f(x, y)$ 只在 $x \leq y$ 时可能不等于 0. 我们如下定义 $\mathcal{F}(X)$ 中两个函数 $f$ 和 $g$ 的卷积 $h = f * g$:
 
+\[ h(x, y) = \begin{cases}
+        \sum_{z : x \leq z \leq y} f(x, z) g(z, y) & \text{若 } x \leq y, \\
+        0                                          & \text{其他.}
+    \end{cases} \]
+\begin{lemma}\label{juanjijiehel}
+    卷积满足结合律. 即$f * (g * h) = (f * g) * h \quad (f, g, h \in \mathcal{F}(X))$.
+\end{lemma}
+\begin{proof}证明$x\leq y$的情况.
+    \begin{align*}
+        f*(g*h)(x,y)= & \sum_{z:x\leq z\leq y}f(x,z)\cdot (g*h)(z,y)                        \\
+        =             & \sum_{z:x\leq z\leq y}f(x,z)\sum_{z':z\leq z'\leq y}g(z,z')h(z',y)  \\
+        =             & \sum_{z:x\leq z\leq y}\sum_{z':z\leq z'\leq y}f(x,z)g(z,z')h(z',y)  \\
+        =             & \sum_{z':x\leq z'\leq y}\sum_{z:x\leq z\leq z'}f(x,z)g(z,z')h(z',y) \\
+        =             & \sum_{z':x\leq z'\leq y}(f*g)(x,z')\cdot h(z',y)                    \\
+        =             & (f * g) * h(x,y).
+    \end{align*}
+    即证.
+\end{proof}
+
+我们考虑$\mathcal{F}(X)$中三种特殊的函数:
+\begin{itemize}
+    \item $\delta$函数: $$\delta(x, y) =
+              \begin{cases}
+                  1 & \text{若 } x = y \\
+                  0 & \text{其他}
+              \end{cases}$$
+              对所有的$f\in \mathcal{F}(X)$, 有$\delta*f=f*\delta=f$, 故称$\delta$为卷积下的恒等函数.
+    \item $\zeta$函数: $$\zeta(x, y) =
+              \begin{cases}
+                  1 & \text{若 } x \leq y \\
+                  0 & \text{其他}
+              \end{cases}$$
+              $\zeta$函数是偏序集$(X,\leq)$的一种表示.
+    \item Möbius函数$\mu$: $\zeta$函数在卷积下的逆函数.
+\end{itemize}
+
+\begin{lemma}
+    设 $f$ 是 $\mathcal{F}(X)$ 中的函数，对 $X$ 中的所有 $y$ 满足 $f(y, y) \neq 0$. 则$f$在卷积下存在逆函数.
+\end{lemma}
+
+\begin{proof}
+    如下递归地定义$\mathcal{F}(X)$ 中的函数$g$:
+
+    首先, 由于$f(y, y) \neq 0$, 可以定义 $$g(y, y) = \frac{1}{f(y, y)} \quad (y \in X).$$
+
+    然后, $$g(x, y) = -\frac{1}{f(y, y)} \sum_{z:x\leq z < y} g(x, z) f(z, y) \quad (x < y).$$
+
+    于是, 不难观察到 $$\sum_{z:x\leq z \leq y} g(x, z) f(z, y) = \delta(x, y) \quad (x \leq y)$$
+
+    即证$g$是$f$在卷积意义下的左逆函数: $g*f=\delta$.
+
+    同理可以证明$f$存在卷积意义下的右逆函数: $f*h=\delta$. 由引理\ref{juanjijiehel}, $$g = g * \delta = g * (f * h) = (g * f) * h = \delta * h = h.$$
+
+    即证, $g$是$f$的逆函数.
+\end{proof}
+
+因此, 由于$\mu*\zeta=\delta$, 我们得到
+$$\sum_{z : x \leq z \leq y} \mu(x, z) \zeta(z, y) = \sum_{z : x \leq z \leq y} \mu(x, z)=\delta(x, y) \quad (x \leq y).$$
+
+由上式可知对所有的$x\in X$, 有$\mu(x,x)=1$. 以及$$\mu(x, y) = -\sum_{z : x \leq z < y} \mu(x, z) \quad (x < y)$$
+
+利用$\mu$是$\zeta$的右逆函数也可以得到对偶的类似结果.
+
+\begin{theorem}[Möbius反演]
+    设 $(X, \leq)$ 是偏序集且有最小元 $0$。设 $\mu$ 是它的Möbius函数, 并设 $F$ : $X \rightarrow \mathbb{R}$ 是定义在 $X$ 上的实值函数. 设函数 $G$ : $X \rightarrow \mathbb{R}$ 是如下定义的函数:
+\[ G(x) = \sum_{z : z \leq x} F(z) \quad (x \in X) \]
+
+那么
+\[ F(x) = \sum_{y : y \leq x} G(y) \mu(y, x) \quad (x \in X). \]
+\end{theorem}
+
+\begin{proof}
+    \begin{align*}
+\sum_{y : y \leq x} G(y) \mu(y, x) &= \sum_{y : y \leq x} \sum_{z : z \leq y} F(z) \mu(y, x) \\
+&= \sum_{y : y \leq x} \mu(y, x) \sum_{z : z \in X} \zeta(z, y) F(z) \\
+&= \sum_{z : z \in X} \sum_{y : y \leq x} \zeta(z, y) \mu(y, x) F(z) \\
+&= \sum_{z : z \in X} \left( \sum_{y : z \leq y \leq x} \zeta(z, y) \mu(y, x) \right) F(z) \\
+&= \sum_{z : z \in X} \delta(z, x) F(z) \\
+&= F(x).
+\end{align*}即证.
+\end{proof}
+
+\section{Möbius反演的应用}
