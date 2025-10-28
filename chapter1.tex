@@ -2,7 +2,7 @@
 \section*{引言}
 本章内容主要来自Brualdi <<组合数学>> 第5章(二项式系数)的内容及对其的拓展与思考.
 \section*{预备知识}
-基本组合数公式：
+基本组合数公式: 
 \[\binom{n}{k} = \binom{n}{n-k}.  \]
 
 帕斯卡公式:
@@ -13,11 +13,11 @@
     设\(n\)是正整数.  对所有的\(x\)和\(y\),  有\[(x + y)^n = \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k.  \]
 \end{theorem}
 \begin{proof}
-    法1：乘积展开, 对项\(x^{n-k}y^k\), 选择\(k\)个因子为\(y\)而剩下\(n-k\)个因子为\(x\)的组合数.
+    法1: 乘积展开, 对项\(x^{n-k}y^k\), 选择\(k\)个因子为\(y\)而剩下\(n-k\)个因子为\(x\)的组合数.
 
-    法2：归纳法.  \(n=1\)时等式成立.
+    法2: 归纳法.  \(n=1\)时等式成立.
 
-    假设等式对\(n\)成立, 对于\(n+1\)：
+    假设等式对\(n\)成立, 对于\(n+1\): 
 
     \begin{align*}
         (x + y)^{n+1} & = (x + y) \left( \sum_{k=0}^{n} \binom{n}{k} x^{n-k} y^k \right)                                                                          \\
@@ -53,13 +53,13 @@
     即证.
 \end{proof}
 
-对等式进行求导和积分是构造组合恒等式的常见思路.  如对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\), 两边对\(x\)求导得\(n(1 + x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\), 带入\(x=1\)得\(n 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\).  更进一步地, 该组合恒等式还可以在两边乘以\(x\)后继续迭代求导, 以得到\(\sum_{k=1}^{n} k^p \binom{n}{k}\)对任意常数\(p\)的组合恒等式.  一个积分构造组合恒等式的例子：
+对等式进行求导和积分是构造组合恒等式的常见思路.  如对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\), 两边对\(x\)求导得\(n(1 + x)^{n-1} = \sum_{k=1}^{n} k \binom{n}{k} x^{k-1}\), 带入\(x=1\)得\(n 2^{n-1} = \sum_{k=1}^{n} k \binom{n}{k}\).  更进一步地, 该组合恒等式还可以在两边乘以\(x\)后继续迭代求导, 以得到\(\sum_{k=1}^{n} k^p \binom{n}{k}\)对任意常数\(p\)的组合恒等式.  一个积分构造组合恒等式的例子: 
 
 \begin{corollary}
     $$\frac{2^{n+1}-1}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{1}{k+1}.  $$
 \end{corollary}
 \begin{proof}
-    对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)两边对\(x\)求不定积分：
+    对等式\((1 + x)^n = \sum_{k=0}^{n} \binom{n}{k} x^k\)两边对\(x\)求不定积分: 
 
     \[\frac{(1+x)^{n+1}}{n+1} = \sum_{k=0}^{n} \binom{n}{k} \frac{x^{k+1}}{k+1} + C.  \]
 
@@ -76,7 +76,7 @@
     即证.
 \end{proof}
 
-特别地, 我们有：
+特别地, 我们有: 
 \[\sum_{k=0}^{n} \binom{n}{k}^2 = \binom{2n}{n} \quad (n \geqslant 0).  \]
 
 \section{二项式系数的单峰性}
@@ -134,23 +134,23 @@
     即证.
 \end{proof}
 
-\section{多项式定理} 
+\section{多项式定理}
 定义多项式系数
 \[
-\binom{n}{n_1\; n_2 \cdots n_t} = \frac{n!}{n_1! \, n_2! \cdots n_t!.}
+    \binom{n}{n_1\; n_2 \cdots n_t} = \frac{n!}{n_1! \, n_2! \cdots n_t!.}
 \]
 其中，\( n_1\;, n_2, \cdots, n_t \) 是非负整数且$n_1 + n_2 + \cdots + n_t = n$.
 
 \begin{theorem}[多项式系数的帕斯卡公式]\label{dxspsk}
     $$\binom{n}{n_1 \; n_2 \; \cdots \; n_t} = \binom{n-1}{n_1-1 \; n_2 \; \cdots \; n_t} + \binom{n-1}{n_1 \; n_2-1 \; \cdots \; n_t} + \cdots + \binom{n-1}{n_1 \; n_2 \; \cdots \; n_t-1}.$$
 \end{theorem}\
-对右边式子通分即可得到证明.
+对右边式子通分即可得到证明.which perl
 
 \begin{theorem}[多项式定理]
-    设 \( n \) 是正整数.  对于所有的 \( x_1, x_2, \cdots, x_t \)，有
-\[
-(x_1 + x_2 + \cdots + x_t)^n = \sum \binom{n}{n_1 \, n_2 \cdots n_t} x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}.
-\]
+    设 \( n \) 是正整数.  对于所有的 \( x_1, x_2, \cdots, x_t \), 有
+    \[
+        (x_1 + x_2 + \cdots + x_t)^n = \sum \binom{n}{n_1 \, n_2 \cdots n_t} x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}.
+    \]
 \end{theorem}
 \begin{proof}
     法1: 根据乘法原理, 式子$x_1^{n_1} x_2^{n_2} \cdots x_t^{n_t}$出现的次数为
@@ -174,7 +174,7 @@
 
     由定理\ref{dxspsk}, $x_1^{m_1} x_2^{m_2} \cdots x_t^{m_t}$的系数为$\binom{n+1}{m_1 \; m_2 \; \cdots \; m_t}$, 即证.
 
-\end{proof} 
+\end{proof}
 
 特别地, 当$x_1=x_2=\cdots=x_t=1$时, 有
 $$t^n=\binom{n}{n_1 \, n_2 \cdots n_t}.$$

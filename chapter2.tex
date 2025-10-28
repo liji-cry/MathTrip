@@ -3,7 +3,7 @@
 本章内容主要来自Brualdi <<组合数学>> 第6章(容斥原理及应用)的内容及对其的拓展与思考.
 
 \section{容斥原理及其对偶形式}
-设$S$是对象的有限集合, $P_1, P_2, \cdots, P_m$ 是 $S$ 的对象所涉及的 $m$ 个性质，并设
+设$S$是对象的有限集合, $P_1, P_2, \cdots, P_m$ 是 $S$ 的对象所涉及的 $m$ 个性质, 并设
 \[ A_i = \{ x : x \text{ 属于 } S \text{ 且 } x \text{ 具有性质 } P_i \} \quad (i = 1, 2, \cdots, m). \]
 
 \begin{theorem}[容斥原理的对偶形式]
@@ -43,7 +43,7 @@
 \section{Möbius反演}
 考虑一个有限偏序集$(X,\leq)$. 设 $\mathcal{F}(X)$ 是满足只要 $x \leq y$ 就有 $f(x, y) = 0$ 的所有实值函数
 \[ f : X \times X \rightarrow \mathbb{R} \]
-的集合，于是 $f(x, y)$ 只在 $x \leq y$ 时可能不等于 0. 我们如下定义 $\mathcal{F}(X)$ 中两个函数 $f$ 和 $g$ 的卷积 $h = f * g$:
+的集合, 于是 $f(x, y)$ 只在 $x \leq y$ 时可能不等于 0. 我们如下定义 $\mathcal{F}(X)$ 中两个函数 $f$ 和 $g$ 的卷积 $h = f * g$:
 
 \[ h(x, y) = \begin{cases}
         \sum_{z : x \leq z \leq y} f(x, z) g(z, y) & \text{若 } x \leq y, \\
@@ -71,18 +71,18 @@
                   1 & \text{若 } x = y \\
                   0 & \text{其他}
               \end{cases}$$
-              对所有的$f\in \mathcal{F}(X)$, 有$\delta*f=f*\delta=f$, 故称$\delta$为卷积下的恒等函数.
+          对所有的$f\in \mathcal{F}(X)$, 有$\delta*f=f*\delta=f$, 故称$\delta$为卷积下的恒等函数.
     \item $\zeta$函数: $$\zeta(x, y) =
               \begin{cases}
                   1 & \text{若 } x \leq y \\
                   0 & \text{其他}
               \end{cases}$$
-              $\zeta$函数是偏序集$(X,\leq)$的一种表示.
+          $\zeta$函数是偏序集$(X,\leq)$的一种表示.
     \item Möbius函数$\mu$: $\zeta$函数在卷积下的逆函数.
 \end{itemize}
 
-\begin{lemma}
-    设 $f$ 是 $\mathcal{F}(X)$ 中的函数，对 $X$ 中的所有 $y$ 满足 $f(y, y) \neq 0$. 则$f$在卷积下存在逆函数.
+\begin{lemma}\label{逆函数引理}
+    设 $f$ 是 $\mathcal{F}(X)$ 中的函数, 对 $X$ 中的所有 $y$ 满足 $f(y, y) \neq 0$. 则$f$在卷积下存在逆函数.
 \end{lemma}
 
 \begin{proof}
@@ -108,23 +108,133 @@ $$\sum_{z : x \leq z \leq y} \mu(x, z) \zeta(z, y) = \sum_{z : x \leq z \leq y} 
 
 利用$\mu$是$\zeta$的右逆函数也可以得到对偶的类似结果.
 
-\begin{theorem}[Möbius反演]
-    设 $(X, \leq)$ 是偏序集且有最小元 $0$。设 $\mu$ 是它的Möbius函数, 并设 $F$ : $X \rightarrow \mathbb{R}$ 是定义在 $X$ 上的实值函数. 设函数 $G$ : $X \rightarrow \mathbb{R}$ 是如下定义的函数:
-\[ G(x) = \sum_{z : z \leq x} F(z) \quad (x \in X) \]
+\begin{theorem}[Möbius反演]\label{mu反演}
+    设 $(X, \leq)$ 是偏序集且有最小元 $0$. 设 $\mu$ 是它的Möbius函数, 并设 $F$ : $X \rightarrow \mathbb{R}$ 是定义在 $X$ 上的实值函数. 设函数 $G$ : $X \rightarrow \mathbb{R}$ 是如下定义的函数:
+    \[ G(x) = \sum_{z : z \leq x} F(z) \quad (x \in X) \]
 
-那么
-\[ F(x) = \sum_{y : y \leq x} G(y) \mu(y, x) \quad (x \in X). \]
+    那么
+    \[ F(x) = \sum_{y : y \leq x} G(y) \mu(y, x) \quad (x \in X). \]
 \end{theorem}
 
 \begin{proof}
     \begin{align*}
-\sum_{y : y \leq x} G(y) \mu(y, x) &= \sum_{y : y \leq x} \sum_{z : z \leq y} F(z) \mu(y, x) \\
-&= \sum_{y : y \leq x} \mu(y, x) \sum_{z : z \in X} \zeta(z, y) F(z) \\
-&= \sum_{z : z \in X} \sum_{y : y \leq x} \zeta(z, y) \mu(y, x) F(z) \\
-&= \sum_{z : z \in X} \left( \sum_{y : z \leq y \leq x} \zeta(z, y) \mu(y, x) \right) F(z) \\
-&= \sum_{z : z \in X} \delta(z, x) F(z) \\
-&= F(x).
-\end{align*}即证.
+        \sum_{y : y \leq x} G(y) \mu(y, x) & = \sum_{y : y \leq x} \sum_{z : z \leq y} F(z) \mu(y, x)                                  \\
+                                           & = \sum_{y : y \leq x} \mu(y, x) \sum_{z : z \in X} \zeta(z, y) F(z)                       \\
+                                           & = \sum_{z : z \in X} \sum_{y : y \leq x} \zeta(z, y) \mu(y, x) F(z)                       \\
+                                           & = \sum_{z : z \in X} \left( \sum_{y : z \leq y \leq x} \zeta(z, y) \mu(y, x) \right) F(z) \\
+                                           & = \sum_{z : z \in X} \delta(z, x) F(z)                                                    \\
+                                           & = F(x).
+    \end{align*}
+    即证. (第二个等式构造出\(\zeta\) 函数)
 \end{proof}
 
-\section{Möbius反演的应用}
+\section{\(\mu\)函数及其性质}
+\begin{corollary}\label{umumu1}
+    偏序集\((\mathcal{P}(X_n),\subseteq) \)的\(\mu\)函数. 设\(|X_n|=n\), $A,B$是\(X_n\)的子集且\(A\subseteq B\). 那么\[\mu(A,B)=(-1)^{|B|-|A|}.\]
+\end{corollary}
+\begin{proof}
+    由于\(\mu\)是\(\zeta\)的逆函数, \(\mu(A,A)=1\). 因此当\(B=A\)时, 等式成立.
+
+    当\(A\subsetneq B\)时, 应用归纳法. 令\(p=|B\backslash A|=|B|-|A|.\)根据引理\ref{逆函数引理}的推论和归纳假设(对于\(C: A \subseteq C \subseteq B\)时假设成立), 我们得到
+    \[\mu(A,B) = -\sum_{C: A \subseteq C \subseteq B} \mu(A,C) = - \sum_{C: A \subseteq C \subseteq B} (-1)^{|C|-|A|} = - \sum_{k=0}^{p-1} (-1)^k \binom{p}{k}.\]
+
+    根据二项式定理, 我们有
+    \[0 = (1 - 1)^p = \sum_{k=0}^{p} (-1)^k \binom{p}{k}.\]
+
+    于是
+    \[\sum_{k=0}^{p-1} (-1)^k \binom{p}{k} = -(-1)^p \binom{p}{p}.\]
+
+    回代\(\mu\)的式子中
+    \[\mu(A,B) = (-1)^p \binom{p}{p} = (-1)^p = (-1)^{|B|-|A|}.\]
+
+    即证.
+\end{proof}
+
+\begin{corollary}
+    线性有序集的\(\mu\)函数. 考虑线性有序集 $(X_n, \leqslant)$, 其中 $1 < 2 < \cdots < n$. 我们有\[\mu(k,l) =
+        \begin{cases}
+            1  & \text{若 } l = k     \\
+            -1 & \text{若 } l = k + 1 \\
+            0  & \text{其他.}
+        \end{cases}\]
+\end{corollary}
+\begin{proof}
+    由归纳法易证.
+\end{proof}
+
+结合定理\ref{mu反演}和推论\ref{umumu1}, 还能得到以下推论.
+
+\begin{corollary}
+    设 \( X_n = \{1, 2, \cdots, n\} \), 且设 \( F: \mathcal{P}(X_n) \to \mathbb{R} \) 为定义在 \( X_n \) 的子集上的函数. 设 \( G: \mathcal{P}(X_n) \to \mathbb{R} \) 是由下式定义的函数：
+    \[ G(K) = \sum_{L \subseteq K} F(L) \quad (K \subseteq X_n) \]
+    那么
+    \[ F(K) = \sum_{L \subseteq K} (-1)^{|K| - |L|} G(L) \quad (K \subseteq X_n). \]
+\end{corollary}
+
+接下来我们考虑直积与其各分量偏序集的\(\mu\)函数的关系. 设 \((X, \leqslant_1)\) 和 \((Y, \leqslant_2)\) 为两个偏序集. 在下面的集合
+\[ X \times Y = \{(x, y) : x \in X, y \in Y\} \]
+上定义关系 \(\leqslant\) 为
+\[ (x, y) \leqslant (x', y') \text{ 当且仅当 } x \leqslant_1 x' \text{ 且 } y \leqslant_2 y'. \]
+容易直接验证 \((X \times Y, \leqslant)\) 是一个偏序集, 叫做 \((X, \leqslant_1)\) 和 \((Y, \leqslant_2)\) 的直积. 我们可以把这个直积结构扩展到任意个偏序集上.
+
+\begin{theorem}[直积的Möbius函数]\label{直积的Möbius函数}
+    设 $(X, \leqslant_1)$ 和 $(Y, \leqslant_2)$ 为两个有限偏序集, 且它们的Möbius函数分别为 $\mu_1$ 和 $\mu_2$. 设 $\mu$ 为 $(X, \leqslant_1)$ 和 $(Y, \leqslant_2)$ 的直积的Möbius函数. 则
+    \[
+        \mu((x,y),(x',y')) = \mu_1(x,x')\mu_2(y,y'). \quad ((x,y),(x',y') \in X \times Y)
+    \]
+\end{theorem}
+
+\begin{proof}
+    当\((x,y)\nleq (x',y')\)或\((x,y)= (x',y')\)时, 容易验证上式成立. 接下来我们对于\((x,y)\leq (x',y')\)且\((x,y)\neq (x',y')\)的情况使用归纳法:
+
+    \begin{align*}
+        \mu((x,y),(x',y')) & = -\sum_{(u,v) : (x,y) \leqslant (u,v) < (x',y')} \mu((u,v),(x',y'))                            \\
+                           & = -\sum_{(u,v) : (x,y) \leqslant (u,v) < (x',y')} \mu_1(u,x')\mu_2(v,y'). \quad \text{（根据归纳假设）}
+    \end{align*}
+
+    由于求和变量在两项乘数之间的独立性, 可以将上式分解为两个和式的积:
+
+    \begin{align*}
+        \text{原式} & = - \Big( \sum_{u: x\leqslant_1 u \leqslant_1 x'} \mu_1(u, x') \Big) \Big( \sum_{v: y\leqslant_2 v \leqslant_2 y'} \mu_2(v, y') \Big) \quad + \mu_1(x, x') \mu_2(y, y') \\
+                  & =-\delta(x,x')\delta(y,y')+ \mu_1(x, x') \mu_2(y, y').
+    \end{align*}
+
+    由于\((x,y)\neq (x',y')\), \(\delta(x,x')\)和\(\delta(y,y')\)中至少一项为0. 即证.
+\end{proof}
+
+\begin{theorem}
+    设 \( F \) 为定义在正整数集上的实值函数. 如下定义这个正整数集上的实值函数 \( G \):
+
+    \[ G(n) = \sum_{k:k \mid n} F(k). \]
+
+    这时, 对于每一个正整数 \( n \), 我们有
+
+    \[ F(n) = \sum_{k:k \mid n} \mu\left(n/k\right) G(k) \]
+
+    其中把 \( \mu(1, n/k) \) 写作 \( \mu(n/k) \).
+\end{theorem}
+
+\begin{proof}
+    设\(n\)是正整数, \(X_n=\{1,2,\cdots,n\}\). 我们考虑整除关系下的偏序集\(D_n=(X_n, \mid )\). 我们首先说明, 如果 \( a \mid b \)，则 \( \mu(a, b) = \mu\left(1, b/a\right) \). 设\([a,b]\)是所有既能整除\(a\)又能整除\(b\)的集合, 也就是说, \(\forall s\in [a,b]\), 有\(s\mid a, s\mid b\). 我们考虑作用在集合\([a,b]\)上的映射\(f[a,b]=[1,b/a]\), 对于任意\(s\in [a,b]\), 存在唯一的\(t=s/a\in [1,b/a]\)与之对应, 因此\(f\)是双射, 且保持了偏序关系的一致性. 因此, 在偏序关系下\([a,b]\)和\([1,b/a]\)是同构的(表现的是同一个偏序集), 所以\( \mu(a, b) = \mu\left(1, b/a\right) \).
+
+    整数 $n$ 有唯一素数因数分解
+    \(n = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_k^{\alpha_k} \),
+    其中 $p_1, p_2, \cdots, p_k$ 是互不相同的素数, 而 $\alpha_1, \alpha_2, \cdots, \alpha_k$ 为正整数. 根据引理\ref{逆函数引理}, 可以得到
+
+    \[\mu(1, n) = -\sum_{m \geq 1, m \mid n, m \neq n} \mu(1, m).\]
+
+    由于\(m\mid n\), \(m\)必须满足\(m=p_1^{\beta_1} p_2^{\beta_2} \cdots p_k^{\beta_k}\)且\(\beta_i\leq\alpha_i\). 因此, 我们其实只需考虑\(X_n\)中满足\(k\mid n\)的所有正整数\(k\)组成的子集\(X^*_n\), 偏序集\((X^*_n, \mid \))其实是\(k\)个线性序($1\mid p_i\mid p_i^2\mid\cdots\mid p_{i}^{\alpha_i}$)的直积. 根据定理\ref{直积的Möbius函数}
+
+    \[\mu(1, n) = \prod_{i=1}^{k} \mu(1, p_i^{\alpha_i}).\]
+
+    结合推论\ref{umumu1}, 我们得到\[\mu(1, n) = 
+\begin{cases} 
+1 & \text{若 } n = 1 \\ 
+(-1)^k & \text{若 } n \text{是}k\text{个互不相同素数的乘积} \\
+0 & \text{其他情形.}
+\end{cases}\]
+
+应用定理\ref{mu反演}, 我们即得到最终结果.
+\end{proof}
+
+\section{Möbius反演的应用} 
