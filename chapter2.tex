@@ -164,7 +164,7 @@ $$\sum_{z : x \leq z \leq y} \mu(x, z) \zeta(z, y) = \sum_{z : x \leq z \leq y} 
 
 结合定理\ref{mu反演}和推论\ref{umumu1}, 还能得到以下推论.
 
-\begin{corollary}
+\begin{corollary}\label{233}
     设 \( X_n = \{1, 2, \cdots, n\} \), 且设 \( F: \mathcal{P}(X_n) \to \mathbb{R} \) 为定义在 \( X_n \) 的子集上的函数. 设 \( G: \mathcal{P}(X_n) \to \mathbb{R} \) 是由下式定义的函数：
     \[ G(K) = \sum_{L \subseteq K} F(L) \quad (K \subseteq X_n) \]
     那么
@@ -202,7 +202,7 @@ $$\sum_{z : x \leq z \leq y} \mu(x, z) \zeta(z, y) = \sum_{z : x \leq z \leq y} 
     由于\((x,y)\neq (x',y')\), \(\delta(x,x')\)和\(\delta(y,y')\)中至少一项为0. 即证.
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}\label{经典mu}
     设 \( F \) 为定义在正整数集上的实值函数. 如下定义这个正整数集上的实值函数 \( G \):
 
     \[ G(n) = \sum_{k:k \mid n} F(k). \]
@@ -227,14 +227,110 @@ $$\sum_{z : x \leq z \leq y} \mu(x, z) \zeta(z, y) = \sum_{z : x \leq z \leq y} 
 
     \[\mu(1, n) = \prod_{i=1}^{k} \mu(1, p_i^{\alpha_i}).\]
 
-    结合推论\ref{umumu1}, 我们得到\[\mu(1, n) = 
-\begin{cases} 
-1 & \text{若 } n = 1 \\ 
-(-1)^k & \text{若 } n \text{是}k\text{个互不相同素数的乘积} \\
-0 & \text{其他情形.}
-\end{cases}\]
+    结合推论\ref{umumu1}, 我们得到\[\mu(1, n) =
+        \begin{cases}
+            1      & \text{若 } n = 1                        \\
+            (-1)^k & \text{若 } n \text{是}k\text{个互不相同素数的乘积} \\
+            0      & \text{其他情形.}
+        \end{cases}\]
 
-应用定理\ref{mu反演}, 我们即得到最终结果.
+    应用定理\ref{mu反演}, 我们即得到最终结果.
 \end{proof}
 
-\section{Möbius反演的应用} 
+\section{Möbius反演的应用}
+\begin{example}
+    把\(n\)个非攻击型车放到带禁止位置的\(n\times n\)棋盘的放置方法数.
+\end{example}
+
+我们将棋盘建模为\(n\times n\)的矩阵\(A\), 其中禁止位置的点值为0, 其余点值为1. 一般地, $n \times n$ 棋盘上 $n$ 个非攻击型车对应于矩阵中的 $n$ 个 1, 且每行和每列上恰好有一个 1. 
+这些 1 又对应于 $\mathcal{P}_n$ 中的双射
+\[ f: \{1,2,\cdots,n\} \to \{1,2,\cdots,n\} \]
+其中 $a_{ij(i)} = 1, \ i = 1, 2, \cdots, n$, 或等价地
+\[ \prod_{i=1}^{n} a_{if(i)} = a_{1f(1)} a_{2f(2)} \cdots a_{nf(n)} = 1 \]
+如果 $f$ 是对于某个 $i$ 有 $a_{if(i)} = 0$ 的双射, 那么
+\[ \prod_{i=1}^{n} a_{if(i)} = a_{1f(1)} a_{2f(2)} \cdots a_{nf(n)} = 0 .\]
+
+因此, 我们可以得到放置方法数为\[\sum_{f \in \mathcal{P}_n} \prod_{i=1}^{n} a_{if(i)}.\]
+这个表达式被称为\(A\)的不变式, 是一个重要的组合函数.
+
+考虑偏序集 $(\mathcal{P}(X_n), \subseteq)$. $X_n$ 的每一个基数为 $k$ 的子集 $S$ 从 $A$ 挑选 $k$ 个列的集合, 我们把由这些列组成的 $n \times k$ 子矩阵记作 $A[S]$. 设 $\mathcal{F}_n(S)$ 表示所有函数 $f: \{1, 2, \ldots, n\} \to S$ 的集合, 并设 $\mathcal{G}_n(S)$ 表示满射函数的子集. 于是, 我们有
+\[
+\mathcal{F}_n(S) = \bigcup_{T \subseteq S} \mathcal{G}_n(T)
+\]
+
+如下定义函数 $F: \mathcal{P}(X_n) \to \mathbb{R}$:
+\[
+F(S) = \sum_{f \in \mathcal{G}_n(S)} \prod_{i=1}^n a_{if(i)}, \quad (S \subseteq X_n)
+\]
+
+(此处, 如果 $S = \varnothing$, 则 $F(S) = 0$). 注意, $F(X_n)=\sum_{f \in \mathcal{P}_n} \prod_{i=1}^{n} a_{if(i)}$. 我们的目标就是进一步计数$F(X_n)$.
+
+设\[G(S)=\sum_{T\subseteq S}F(T)=\sum_{T\subseteq S}\sum_{f \in \mathcal{G}_n(T)} \prod_{i=1}^n a_{if(i)}, \quad (S \subseteq X_n).\]
+
+由于$\mathcal{G}_n(S)$ 是满射函数的子集, 对于不同的\(T_1\neq T_2\), $\mathcal{G}_n(T_1)$和$\mathcal{G}_n(T_2)$ 无交集. 加上\(\mathcal{F}_n(S) = \bigcup_{T \subseteq S} \mathcal{G}_n(T)\), 我们将求和项从有限制集合\(\mathcal{G}\)改写到了无限制集合\(\mathcal{F}\)上:
+
+\[G(S) = \sum_{g\in \mathcal{F}_n(S)} \prod_{i=1}^{n} a_{ig(i)}=\prod_{i=1}^{n} (\sum_{j\in S}a_{ij}). \quad (S \subseteq X_n)\]
+
+由推论\ref{233}, \[F(X_n) = \sum_{S \subseteq X_n} (-1)^{n - |S|} G(S)= \sum_{S \subseteq X_n} (-1)^{n - |S|}\prod_{i=1}^{n} (\sum_{j\in S}a_{ij}).\]
+
+\begin{example}
+    欧拉\(\varphi\)函数的计算. 该函数对于正整数 $n$ 的定义是
+\[ \varphi(n) = |S_n| \]
+
+其中
+\[ S_n = \{ k : 1 \leq k \leq n, \gcd(k, n) = 1 \} .\]
+\end{example}
+
+我们进一步推广\(S_n\), 设\[S_n^d = \{ k : 1 \leq k \leq n, \gcd(k, n) = d \} \quad (d \text{ 是 } n \text{ 的正因子})\]
+显然有\(S_n=S_{n}^1\). 对于任意满足\(\gcd(k,n)=d\)的整数\(k\), 它必然唯一对应\(k=dk'\)且\(\gcd(k',n/d)=1\). 因此\(|S_{n}^d|=\varphi(n/d)\). 设
+\[G(n)=\sum_{d:d|n}\varphi(d)\]
+由于每一个\(1\leq k\leq n\), \(\gcd(k,n)\)是唯一的, 因此\(G(n)=n\), 即\(n=\sum_{d:d|n}\varphi(d)\).
+
+根据定理\ref{经典mu}, 得
+
+\[\varphi(n) = \sum_{d:d\mid n} \mu\left(\frac{n}{d}\right)d = \sum_{d:d\mid n} \mu(d)\frac{n}{d}.\]
+
+此时, $\mu(d)$ 非 0 当且仅当 $d=1$ 或 $d$ 是互不相同的素数的乘积; 对于后面的情况, $\mu(d)=(-1)^r$, 其中 $r$ 是 $d$ 中互不相同素数的个数. 设这些整除\(n\)的所有互异素数为 $p_1, p_2, \ldots, p_r$. 这时, 
+\[\varphi(n)=
+n - \left( \frac{n}{p_1} + \frac{n}{p_2} + \cdots \right)
++ \left( \frac{n}{p_1p_2} + \frac{n}{p_1p_3} + \cdots \right)
++ \cdots + (-1)^r \frac{n}{p_1p_2 \cdots p_r},
+\]
+而这正是下面的乘积展开式:
+\[
+n \prod_{i=1}^{r} \left(1 - \frac{1}{p_i}\right)
+\]
+因此, 有
+\[
+\varphi(n) = n \prod_{p \mid n} \left(1 - \frac{1}{p}\right)
+\]
+其中, 乘积是对所有整除 $n$ 的互不相同素数 $p$ 求积.
+
+\begin{example}
+    计算 $k$ 个不同符号 $a_1, a_2, \cdots, a_k$ 的循环 $n$ 排列的个数, 其中, 每一个符号都可以使用任意多次, 或等价地, 我们计算多重集合 $\{n \cdot a_1, n \cdot a_2, \cdots, n \cdot a_k\}$ 的循环 $n$ 排列的数目.
+\end{example}
+
+处理这个问题依旧遵循从计数有限制集合反演到计数无限制集合的思路. 我们说一个本原线性串的长度为\(m\), 指这个线性串长度为\(m\)且不能被其自身的子串循环表示. 首先我们定义有限制集合, 设\(f(m)\)为使用符号$a_1, a_2, \cdots, a_k$的长度为\(m\)的本原线性串的个数. 再设\(h(n)\)为我们最终要求的使用$k$ 个不同符号 $a_1, a_2, \cdots, a_k$ 的循环 $n$ 排列的个数.
+
+因为\(n\)的所有因子对应的不同长度\(d\)的本原线性串, 每个本原线性串通过倍增操作得到长度为\(n\)的线性串是唯一的, 且对于本原长度\(d\), 会有\(d\)个不同的本原线性串对应同一个循环排列. 于是
+
+\[h(n) = \sum_{d : d \mid n} \frac{f(d)}{d}.\]
+
+接下来, 我们期望将计数有限制集合的函数\(f(m)\)转化到计数无限制集合的函数\(g(m)\)上. 我们定义\(g(m)\)为长度为\(m\)的线性串的总数, 它或者由长度为\(m\)的本原线性串得到, 或者由长度为\(x,\text{满足}x|m\)的本原线性串倍增得到. 因此
+
+\[g(m) = \sum_{e : e \mid m} f(e)=k^m.\]
+
+根据定理\ref{经典mu}, \[f(m) = \sum_{e: e| m} \mu(m/e) g(e) = \sum_{e: e| m} \mu(m/e) k^e.\]
+
+带入\(h(n)\)的式子, 
+
+\[h(n)=\sum_{d : d \mid n} \frac{f(d)}{d}=\sum_{d : d \mid n}\sum_{e:e|d}\frac{1}{d} \mu(d/e)k^e.\]
+
+我们考虑代换\(d=me\)并交换求和次序
+
+\[h(n)=\sum_{e: e| m} \left( \sum_{m: m| n/e} \frac{1}{me} \mu(m) \right) k^e.\]
+
+接下来一步较难想到. 我们想使用欧拉数的反演结论, 也就是\[\varphi(n) = \sum_{d:d\mid n} \mu\left(\frac{n}{d}\right)d = \sum_{d:d\mid n} \mu(d)\frac{n}{d}.\]
+注意到反演公式的和式内为\(2\)项相乘的形式, \(\mu\)项和常数项内部差一个因子\(d\). 我们想把\(h(n)\)的表达式转化到这种形式.
+
+设\(n/e=rm\), \[h(n)=\sum_{e: e| n} \left( \sum_{r: r| n/e} \frac{r}{n} \mu\left(\frac{n/e}{r}\right) \right) k^e=\sum_{\{e: e| n\}} \frac{\varphi(n/e)}{n} k^e=\frac{1}{n}\sum_{\{e: e| n\}}\varphi(n/e)k^e.\]
